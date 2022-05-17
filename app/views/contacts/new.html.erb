@@ -1,0 +1,50 @@
+<div class="col-sm-6 col-md-6">
+    <%= form_for @contact, url: "/contacts", method: :post, remote: true do |f| %>
+        <%= hidden_field_tag :sid %>
+        <%= f.label :name %>
+        <br>
+        <%= f.text_field :name, required: true %>
+        <br>
+        <%= f.label :phone_number %>
+        <br>
+        <%= f.text_field :phone_number, type: "number", required: true %>
+        <br>
+        <%= f.label :verification_code %>
+        <br>
+        <%= text_field_tag :verification_code, nil, required: true %>
+        <button id="opt-click">Send</button>
+        <br>
+        <%= f.label :email %>
+        <br>
+        <%= f.text_field :email, type: "email", required: true %>
+        <br>
+        <%= f.label :available_on %>
+        <br>
+        <%= f.text_field :available_on, type: "date" %>
+        <br>
+        <%= f.submit %>
+    <% end %>
+</div>
+
+<script>
+    $(function(){
+        $("#opt-click").on('click', function(e){
+            e.preventDefault();
+            $.ajax({
+                method: "POST",
+                url: "/otps/request_otp",
+                data: { verification: {phone_number: $("#person_phone_number").val(), country_code: "cn"} }
+            }).done(function(res) {
+                if(res.status == true){
+                    $("#sid").val(res.sid);
+                    alert( "success" );
+                }else{
+                    alert("SID is empty, please try again later.");
+                }
+                
+            }).fail(function() {
+                alert( "error" );
+            })
+        })
+    })
+</script>
