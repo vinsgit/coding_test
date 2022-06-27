@@ -11,22 +11,22 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_05_17_052511) do
-  create_table "otps", force: :cascade do |t|
-    t.string "code"
-    t.string "sid", limit: 50
-    t.string "phone_number"
-    t.boolean "active", default: true
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "people", force: :cascade do |t|
+  create_table "contacts", force: :cascade do |t|
     t.string "name"
     t.string "phone_number"
     t.string "otp"
     t.string "email"
     t.date "available_on"
     t.integer "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "otps", force: :cascade do |t|
+    t.string "code"
+    t.string "sid", limit: 50
+    t.string "phone_number"
+    t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

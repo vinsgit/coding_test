@@ -4,7 +4,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  resources :contacts, only: [:index, :create, :new]
+  resources :contacts, only: [:index, :create, :new, :search] do
+    collection do
+      get :search
+    end
+  end
+
   resources :otps, only: [] do
     collection do
       post :request_otp

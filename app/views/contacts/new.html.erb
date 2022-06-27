@@ -1,29 +1,32 @@
-<div class="col-sm-6 col-md-6">
-    <%= form_for @contact, url: "/contacts", method: :post, remote: true do |f| %>
-        <%= hidden_field_tag :sid %>
-        <%= f.label :name %>
-        <br>
-        <%= f.text_field :name, required: true %>
-        <br>
-        <%= f.label :phone_number %>
-        <br>
-        <%= f.text_field :phone_number, type: "number", required: true %>
-        <br>
-        <%= f.label :verification_code %>
-        <br>
-        <%= text_field_tag :verification_code, nil, required: true %>
-        <button id="opt-click">Send</button>
-        <br>
-        <%= f.label :email %>
-        <br>
-        <%= f.text_field :email, type: "email", required: true %>
-        <br>
-        <%= f.label :available_on %>
-        <br>
-        <%= f.text_field :available_on, type: "date" %>
-        <br>
-        <%= f.submit %>
-    <% end %>
+<div class="container" >
+  <div class="contact new-contact">
+        <nav class="navbar navbar-light bg-light justify-content-between col-md-12">
+        <div class="navbar-brand">Contact Us</div>
+        </nav>
+        <%= form_for @contact, url: "/contacts", method: :post, remote: true, html: {class: "row no-gutters col-sm-10 col-md-10 justify-content-md-end" } do |f| %>
+            <%= hidden_field_tag :sid %>
+            <div class="form-group col-md-12">
+                <%= f.text_field :name, required: true, class: "form-control", placeholder: "Name" %>
+            </div>
+            <div class="form-group col-md-12">
+                <%= f.text_field :phone_number, type: "number", required: true, class: "form-control", placeholder: "Phone Number" %>
+            </div>
+            <div class="form-group col-md-12 d-inline-flex">
+                <%= text_field_tag :verification_code, nil, required: true, class: "form-control", placeholder: "Verification Code" %>
+                <button id="opt-click" class="btn btn-outline-secondary" type="button">Send</button>
+            </div>
+            <div class="form-group col-md-12">
+                <%= f.text_field :email, type: "email", required: true, class: "form-control", placeholder: "Email" %>
+            </div>
+            <div class="form-group col-md-12">
+                <%= f.text_field :available_on, type: "date", class: "form-control" %>
+            </div>
+            <div class="form-group col-md-12">
+                <%= f.select :role, Contact.roles.transform_keys{ |k| "I'm a #{ k == "parentage" ? "Parent" : k.capitalize}" }, { prompt: 'Tell me about you' }, { class: 'form-control' }%>
+            </div>
+            <%= f.submit :Submit, class: "btn btn-outline-dark float-end" %>
+        <% end %>
+  </div>    
 </div>
 
 <script>
@@ -33,7 +36,7 @@
             $.ajax({
                 method: "POST",
                 url: "/otps/request_otp",
-                data: { verification: {phone_number: $("#person_phone_number").val(), country_code: "cn"} }
+                data: { verification: { phone_number: $("#person_phone_number").val(), country_code: "cn" } }
             }).done(function(res) {
                 if(res.status == true){
                     $("#sid").val(res.sid);

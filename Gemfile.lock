@@ -90,6 +90,9 @@ GEM
       reline (>= 0.2.7)
     digest (3.1.0)
     erubi (1.10.0)
+    faker (2.21.0)
+      i18n (>= 1.8.11, < 2)
+    ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
     httparty (0.20.0)
@@ -138,6 +141,8 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.6-x86_64-linux)
       racc (~> 1.4)
+    pagy (5.10.1)
+      activesupport
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -180,6 +185,14 @@ GEM
       io-console (~> 0.5)
     rexml (3.2.5)
     rubyzip (2.3.2)
+    sassc (2.4.0)
+      ffi (~> 1.9)
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     selenium-webdriver (4.1.0)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
@@ -192,8 +205,11 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     sqlite3 (1.4.2)
+    stimulus-rails (1.0.4)
+      railties (>= 6.0.0)
     strscan (3.0.3)
     thor (1.2.1)
+    tilt (2.0.10)
     timeout (0.2.0)
     turbo-rails (1.0.1)
       actionpack (>= 6.0.0)
@@ -223,15 +239,19 @@ DEPENDENCIES
   bootsnap
   capybara
   debug
+  faker
   httparty (~> 0.20.0)
   importmap-rails
   jbuilder
+  pagy (~> 5.10, >= 5.10.1)
   pry
   puma (~> 5.0)
   rails (~> 7.0.3)
+  sassc-rails
   selenium-webdriver
   sprockets-rails
   sqlite3 (~> 1.4)
+  stimulus-rails
   turbo-rails
   tzinfo-data
   web-console

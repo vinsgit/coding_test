@@ -1,0 +1,39 @@
+<div class="container" data-controller="search">
+  <div class="contact">
+    <nav class="navbar navbar-light bg-light justify-content-between col-md-12">
+      <div class="navbar-brand">Contact List</div>
+        <form class="form-inline">
+          <i class="fa fa-solid fa-magnifying-glass"></i>
+          <input class="form-control mr-sm-2" data-action="search#typeIn" data-search-target="name" type="text" placeholder="Search" aria-label="Search">
+        </form>
+    </nav>
+    <div class="col-12 data-list">
+      <table class="table" id="contactsTable">
+        <thead>
+          <tr>
+            <th scope="col" data-type="id" >id</th>
+            <th scope="col" data-type="name">name</th> 
+            <th scope="col" data-type="phone_number">phone</th>
+            <th scope="col" data-type="email">email</th>
+            <th scope="col" data-type="available_on">available on</th>
+            <th scope="col" data-type="role">type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @contacts.each do |contact| %>
+            <tr>
+              <td><%= contact.id %></td>
+              <td><%= contact.name %></td>
+              <td><%= contact.phone_number %></td>
+              <td><%= contact.email %></td>
+              <td><%= contact.available_on %></td>
+              <td><%= contact.role == "parentage" ? "Parent" : contact.role.capitalize  %></td>
+            </tr>
+            <% end %>
+        </tbody>
+      </table>
+      <%== pagy_bootstrap_nav(@pagy) %> 
+    </div>
+  </div>
+</div>
+
